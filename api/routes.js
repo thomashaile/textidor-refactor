@@ -1,15 +1,17 @@
 // require the handlers
-_;
+//const handler = require('handlers');
+//_;
+const handlers = require('./handlers');
 const express = require('express');
-
-// build the router
-_;
-
-router.get('/', (req, res) => {
-  res.send('files API!');
-});
+const path = require('path');
+const router = express.Router();
 
 // add routes to router
+router.get('/', handlers.home);
+router.get('/files', handlers.listFiles);
+router.get('/files/:name', handlers.fetchAndLoadFile);
+router.post('/files/:name', handlers.saveFile);
+router.delete('/files/:name', handlers.deleteFile);
 
 // export the router
-_;
+module.exports = router;
